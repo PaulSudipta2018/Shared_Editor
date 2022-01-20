@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+	<html>
+		<head>
+			<meta charset="utf-8">
+			<title>Websockets</title>
+			<!--<script src = "/node_modules/socket.io/client-dist/socket.io.js"></script>
+			<link href="/styles.css" ref = "stylesheet"/>-->
+			<script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
+		</head>
+		<body>
+			<div id = "my-chat">
+				<div id = "chat-window">
+					<div id = "output">
+					</div>
+					<!--<input id = "handle" type = "text" placeholder = "Handle"/>-->
+					<textarea id="message" name="message" rows="4" cols="50"></textarea>
+					<!--<input id = "message" type = "text" placeholder = "Message"/>
+					<button id = "send">Send</button>-->
+				</div>
+			</div>
+		
+			<!--<script src = "/chat.js"></script>-->
+			<script>
+				var socket = io.connect('http://localhost:3000');
+
+				//Query DOM
+				var message = document.getElementById('message');
+					//handle = document.getElementById('handle');
+					//btn = document.getElementById('send');
+					output = document.getElementById('output');
+					
+					
+					
+				//Emit events
+				message.addEventListener('input', function(){
+					socket.emit('chat', {
+						message : message.value
+					})
+				});
+
+				//Listen for events
+
+				socket.on('chat', function(data){
+					var message1 = document.getElementById('message');
+					console.log('received messsage : ' + data.message);
+					message1.value = data.message;
+					console.log('current messsage content : ' + data.message);	
+
+				});
+			</script>
+		</body>
+	</html>
