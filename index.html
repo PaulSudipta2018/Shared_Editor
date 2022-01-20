@@ -21,7 +21,8 @@
 		
 			<!--<script src = "/chat.js"></script>-->
 			<script>
-				var socket = io.connect('http://localhost:3000');
+				var socket = io.connect('http://192.168.0.103:3000/');
+				//here the ip '192.168.0.103:3000' is of websocket server address
 
 				//Query DOM
 				var message = document.getElementById('message');
